@@ -2,13 +2,13 @@
          REVERSE BIDDING SYSTEM
 ===================================
 
-Names :
+**Team Members:**
 
-Dinesh Daki - 861345742
-Pavithra Halanayakanahalli Amaresh - 885155101
-Lakshmi Poojitha Lysetti - 885155077
-Sandeep Divakarni - 876253808
-Suchita Penubothu - 885165019
+- Dinesh Daki - 861345742
+- Pavithra Halanayakanahalli Amaresh - 885155101
+- Lakshmi Poojitha Lysetti - 885155077
+- Sandeep Divakarni - 876253808
+- Suchita Penubothu - 885165019
 
 The Reverse Bidding System is a smart contract-based application that facilitates a reverse auction process for a single, physical item. Built on Ethereum, it ensures transparency, security, and efficiency in the bidding process.
 
@@ -25,7 +25,7 @@ The Reverse Bidding System is a smart contract-based application that facilitate
    - Emits events for critical actions like auction closure.
 
 -----------------------------------
-         **HOW IT WORKS**
+         HOW IT WORKS
 -----------------------------------
 1. Initialization:
    - The seller deploys the contract with the following parameters:
