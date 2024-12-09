@@ -25,7 +25,7 @@ The Reverse Bidding System is a smart contract-based application that facilitate
    - Emits events for critical actions like auction closure.
 
 -----------------------------------
-         HOW IT WORKS
+         **HOW IT WORKS**
 -----------------------------------
 1. Initialization:
    - The seller deploys the contract with the following parameters:
