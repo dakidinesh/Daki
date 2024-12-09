@@ -1,54 +1,124 @@
-The BasicDutchAuction.sol contract works as follows:
-The seller instantiates a DutchAuction contract to manage the auction of a single, physical item at a single auction event. The contract is initialized with the following parameters: 
-reservePrice: the minimum amount of wei that the seller is willing to accept for the item 
-numBlocksAuctionOpen: the number of blockchain blocks that the auction is open for
-offerPriceDecrement: the amount of wei that the auction price should decrease by during each subsequent block. 
-The seller is the owner of the contract. 
-The auction begins at the block in which the contract is created. 
-The initial price of the item is derived from reservePrice, numBlocksAuctionOpen, and  offerPriceDecrement: initialPrice = reservePrice + numBlocksAuctionOpen*offerPriceDecrement 
-A bid can be submitted by any Ethereum externally-owned account. 
-The first bid processed by the contract that sends wei greater than or equal to the current price is the  winner. The wei should be transferred immediately to the seller and the contract should not accept  any more bids. All bids besides the winning bid should be refunded immediately. 
+===================================
+         REVERSE BIDDING SYSTEM
+===================================
 
-Deploy your Version 6.0 dapp on an Ethereum testnet.
-This step will require getting test eth from a faucet.
-Sometimes these faucets can be unreliable so you’ll have to keep searching online for a faucet that gives you enough eth to successfully deploy your contract.
-Hardhat can deploy your contracts for you: https://hardhat.org/tutorial/deploying-to-a-live-network
-Host your UI through IPFS. 
-You will host your UI on your own machine, and you will use IPFS to enable others to access it through an ipfs:// url.
-Get the CID of your build directory that contains your built UI, and prefix the CID with “ipfs://”.
-For example if your CID is QmRgCTtKd91QkgoTiJQky57pCRda2drKEvTyFkUznaoKm3, the URL to access the content is ipfs://QmRgCTtKd91QkgoTiJQky57pCRda2drKEvTyFkUznaoKm3
-Steps:
-Generate build files for your UI
-Install IPFS desktop and IPFS browser plugin.
-Pin your UI build files to your IPFS Desktop node.
-Add the IPFS url to your README.md file in your repo.
-Use IPNS to generate a fixed name for your UI: https://docs.ipfs.tech/concepts/ipns/#mutability-in-ipfs
+Names :
 
-BasicDutchAuction
-    ✔ should initialize the contract correctly (78ms)
-    ✔ should allow bidders to place valid bids (65ms)
-    ✔ should emit AuctionEnded event with address(0) and 0 amount when no bids were placed
-    ✔ should not allow bids below the 0 (41ms)
-    ✔ should end the auction and transfer funds to the seller (39ms)
-    ✔ should allow bidders to refund their bids if they are not the highest bidder (48ms)
-    ✔ should not allow the highest bidder to refund their bid (43ms)
-    ✔ should not allow the bidder to refund their bid if auction has not ended
-    ✔ should not allow bidder to refund if they do not have a bid (47ms)
-    ✔ should accumulate bid amount for bidders who do not have the highest bid
-    ✔ should revert when placing a bid after the auction has ended
-    ✔ should end the auction and transfer funds to the seller when the highest bid is non-zero
+Dinesh Daki - 861345742
+Pavithra Halanayakanahalli Amaresh - 885155101
+Lakshmi Poojitha Lysetti - 885155077
+Sandeep Divakarni - 876253808
+Suchita Penubothu - 885165019
+
+The Reverse Bidding System is a smart contract-based application that facilitates a reverse auction process for a single, physical item. Built on Ethereum, it ensures transparency, security, and efficiency in the bidding process.
+
+-----------------------------------
+         FEATURES
+-----------------------------------
+1. Dynamic Pricing:
+   - The item's price decreases with every block until a bid is placed or the auction ends.
+2. Secure Transactions:
+   - Winning bid funds are immediately transferred to the seller.
+3. Refunds for Non-Winning Bids:
+   - Non-winning bidders are refunded automatically.
+4. Event Notifications:
+   - Emits events for critical actions like auction closure.
+
+-----------------------------------
+         HOW IT WORKS
+-----------------------------------
+1. Initialization:
+   - The seller deploys the contract with the following parameters:
+     - `minimumPrice`: The lowest amount the seller will accept.
+     - `auctionDurationInBlocks`: Number of blocks the auction will remain active.
+     - `priceDropPerBlock`: Amount by which the item's price decreases with each block.
+   - The seller becomes the contract owner, and the auction begins upon deployment.
+
+2. Price Calculation:
+   - Initial price is computed as:
+     startingPrice = minimumPrice + auctionDurationInBlocks * priceDropPerBlock
+
+3. Bidding Process:
+   - Participants place bids as the price dynamically decreases.
+   - The first bid that matches or exceeds the current price wins.
+   - Winning funds are transferred to the seller, and further bids are disallowed.
+   - Non-winning bids are refunded immediately.
+
+-----------------------------------
+         FRONTEND SETUP
+-----------------------------------
+1. Navigate to the frontend directory:
+   cd frontend
+
+2. Install Node.js version 16.13.1:
+   nvm install 16.13.1
+   nvm use 16.13.1
+
+3. Install dependencies:
+   yarn
+   yarn add ethers@^5.5.2
+   yarn add react-scripts
+
+4. Start the frontend server:
+   yarn start
+
+-----------------------------------
+         BACKEND SETUP
+-----------------------------------
+1. Install Node.js version 18:
+   nvm install 18
+   nvm use 18
+
+2. Install backend dependencies:
+   yarn
 
 
-  12 passing (1s)
+-----------------------------------
+       SMART CONTRACT SETUP
+-----------------------------------
+1. Install Hardhat:
+   yarn add --dev hardhat
+   OR
+   npm install --save-dev hardhat
 
-------------------------|----------|----------|----------|----------|----------------|
-File                    |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
-------------------------|----------|----------|----------|----------|----------------|
- contracts\             |      100 |      100 |      100 |      100 |                |
-  BasicDutchAuction.sol |      100 |      100 |      100 |      100 |                |
-------------------------|----------|----------|----------|----------|----------------|
-All files               |      100 |      100 |      100 |      100 |                |
-------------------------|----------|----------|----------|----------|----------------|
+2. Add additional plugins and tools:
+   npm install --save-dev \
+   "@nomicfoundation/hardhat-network-helpers@^1.0.0" \
+   "@nomiclabs/hardhat-etherscan@^3.0.0" \
+   "@types/mocha@>=9.1.0" \
+   "@typechain/ethers-v5@^10.1.0" \
+   "@typechain/hardhat@^6.1.2" \
+   "hardhat-gas-reporter@^1.0.8" \
+   "ts-node@>=8.0.0" \
+   "typechain@^8.1.0" \
+   "typescript@>=4.5.0"
 
+3. Compile the contract:
+   yarn compile
 
-IPNS URL: http://k51qzi5uqu5dhmeg7kd96vprcw96mwfjaa1xjrefy1j7mjdlw28pivj6ghkr6u.ipns.localhost:8080/
+4. Run a local blockchain node:
+   yarn hardhat node
+
+-----------------------------------
+          TESTING
+-----------------------------------
+The contract includes comprehensive tests for:
+- Proper contract initialization.
+- Validation of bids and bid refunds.
+- Transfer of funds to the seller on a successful bid.
+- Rejection of bids after the auction ends.
+
+To run the tests:
+   yarn test
+
+-----------------------------------
+        PROJECT STRUCTURE
+-----------------------------------
+Reverse-Bidding-System/
+├── frontend/        # React frontend code
+├── backend/         # Backend API and server logic
+├── contracts/       # Smart contract code
+├── test/            # Unit and integration tests
+├── hardhat.config.js# Hardhat configuration
+└── README.md        # Project documentation
+
