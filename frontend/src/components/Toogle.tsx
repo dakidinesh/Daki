@@ -28,29 +28,38 @@ export default function Toggle() {
       <div
         style={{
           display: 'flex', 
-          flexDirection: 'row', 
+          flexDirection: 'column', 
           justifyContent: 'space-evenly', 
           alignItems: 'center',
         }}
       >
         <Box sx={{ width: '33%', textAlign: 'center' }}>
+          <Typography variant="h1" sx={{ fontFamily: "Arial", fontWeight: "bold", fontSize: "2rem" }}>
+            REVERSE BIDDING SYSTEM
+          </Typography>
+        </Box>
+        <Box sx={{ width: '33%', paddingTop: '20px'}}>
+          <ActivateDeactivate />
+        </Box>
+        <Box sx={{ width: '50%', textAlign: 'center', paddingTop:'20px' }}>
           <ToggleButtonGroup
             value={activeComponent}
             exclusive
             onChange={handleComponentChange}
             aria-label="component toggle"
             sx={{
-            backgroundColor: 'transparent',
+            backgroundColor: 'white',
             '& .MuiToggleButton-root': {
               backgroundColor: 'white',
-              color: "#1b7db3",
+              color: "black",
               margin: '5px',
               borderRadius: '10px',
+              borderWidth: '3px',
               height: '50px'
             },
             '& .MuiToggleButton-root.Mui-selected': {
-              backgroundColor: '#1b7db3',
-              color: 'white'
+              backgroundColor: 'orange',
+              color: 'black'
             }
           }}
           >
@@ -68,15 +77,9 @@ export default function Toggle() {
             </ToggleButton>
           </ToggleButtonGroup>
         </Box>
-        <Box sx={{ width: '33%', textAlign: 'center' }}>
-          <Typography variant="h1" sx={{ fontFamily: "Arial", fontWeight: "bold", fontSize: "2rem" }}>
-            DUTCH AUCTION
-          </Typography>
-        </Box>
+      
 
-        <Box sx={{ width: '33%'}}>
-          <ActivateDeactivate />
-        </Box>
+        
       </div>
 
       <Box
@@ -89,7 +92,7 @@ export default function Toggle() {
         alignItems="center" // Center vertically
         justifyContent="space-between" // Space items evenly
         mt={5}
-        borderRadius="25px" // Set border radius
+        borderRadius="30px" // Set border radius
       >
         {activeComponent === "dutch" && <DutchAuction />}
         {activeComponent === "lookup" && <LookUp />}

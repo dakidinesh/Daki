@@ -5,7 +5,7 @@ import {WalletStatus} from "./WalletStatus";
 
 const Navbar: React.FC = () => {
     return (
-        <AppBar position="static">
+        <AppBar position="static" style={{ backgroundColor: 'black' }}>
             <Container maxWidth="lg">
                 <Toolbar sx={{ justifyContent: "space-between" }}>
                     <div style={{ display: "flex", gap: "10px" }}>
